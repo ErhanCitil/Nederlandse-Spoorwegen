@@ -39,6 +39,7 @@ urlpatterns = [
     ),
     # Simply show the master template.
     path("", TemplateView.as_view(template_name="master.html"), name="root"),
+    path("", include("nederlandse_sporowegen.nsapi.urls")),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
