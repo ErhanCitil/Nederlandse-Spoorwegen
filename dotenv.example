@@ -1,0 +1,10 @@
+SECRET_KEY="django-insecure-svop&2)6grnk6_mudmrl(l0q!&9n0qf3c#6a$ntlzz1r)1)gxs"
+DB_NAME="nederlandse_spoorwegen"
+DB_USER="nederlandse_spoorwegen"
+#
+# For peer authentication via unix domain socket
+# these should be kept empty.
+#
+DB_PASSWORD=""
+DB_HOST=""
+DB_PORT=""
