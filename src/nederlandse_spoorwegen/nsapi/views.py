@@ -29,7 +29,8 @@ class Index(TemplateView):
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['stations'] = self.get_stations_json()
-            context['lat'] = context['stations']['lat']
-            context['lng'] = context['stations']['lng']
+            if context['stations']:
+                context['lat'] = context['stations']['lat']
+                context['lng'] = context['stations']['lng']
             context['googleapi'] = GOOGLE_API_KEY
             return context
