@@ -9,20 +9,31 @@ load_dotenv()
 NSAPI_KEY = os.getenv('NSAPI_KEY')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
+class NSClient:
+    def __init__(self):
+        self.url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/'
+        self.headers = {'Ocp-Apim-Subscription-Key': NSAPI_KEY}
+
+    def get_stations(self):
+        url = self.url + 'stations'
+        response = requests.get(url, headers=self.headers)
+        if response.status_code == 200:
+            response = response.json()
+            return response['payload']
+        else:
+            return None
+
 class Index(TemplateView):
     template_name = 'index.html'
 
     def get_stations_json(self):
         search = self.request.GET.get('q')
         if search:
-            url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations'
-            headers = {'Ocp-Apim-Subscription-Key': NSAPI_KEY}
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                response = response.json()
-                for station in response['payload']:
-                    if search in station['namen']['lang']:
-                        return station
+            client = NSClient()
+            stations = client.get_stations()
+            for station in stations:
+                if station['namen']['lang'] == search:
+                    return station
         else:
             return None
     
@@ -39,14 +50,9 @@ class StationView(TemplateView):
     template_name = 'stations.html'
 
     def get_station_names(self):
-        url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations'
-        headers = {'Ocp-Apim-Subscription-Key': NSAPI_KEY}
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            response = response.json()
-            return response['payload']
-        else:
-            return None
+        client = NSClient()
+        stations = client.get_stations()
+        return stations
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
