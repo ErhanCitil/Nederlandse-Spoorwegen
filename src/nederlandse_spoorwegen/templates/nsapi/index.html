@@ -30,7 +30,9 @@
 
     </form>
 
-<h1 class="font-bold text-center text-2xl">{{stations.namen.lang}}</h1>
+{% if stations %}
+<h1 class="font-bold text-center text-2xl">{{stations}}</h1>
+{% endif %}
 
 {% if stations %}
 <iframe width="600"

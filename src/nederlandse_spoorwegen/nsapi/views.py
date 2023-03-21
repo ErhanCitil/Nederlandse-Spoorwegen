@@ -22,7 +22,7 @@ class NSClient:
             return response['payload']
         else:
             return None
-        
+
 class Index(TemplateView):
     template_name = 'nsapi/index.html'
 
@@ -66,7 +66,7 @@ class StationDetailView(TemplateView):
         client = NSClient()
         stations = client.get_stations()
         for station in stations:
-            if station['namen']['kort'] == self.kwargs['name']:
+            if station['UICCode'] == self.kwargs['uiccode']:
                 return station
             
     def get_departures(self):

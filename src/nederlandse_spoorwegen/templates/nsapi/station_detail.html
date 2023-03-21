@@ -13,6 +13,7 @@ allowfullscreen class="flex m-auto mt-8"></iframe>
 
 
 {% for departure in departures%}
-<p>{{departure.direction}}</p>
+<p>{{departure.direction}}</p> 
+<p>{{departure.plannedDateTime}}</p>
 {% endfor %}
 {% endblock %}

@@ -2,7 +2,6 @@
 {% block title%} Stations {% endblock %}
 {% block content %}
 <div class="flex justify-center mt-10" style="height: 350px">
-    <!-- Table Series -->
     <div class="col-span-12 h-screen">
       <div class="overflow-auto lg:overflow-visible">
         <table
@@ -15,18 +14,18 @@
             </tr>
           </thead>
   
-          {% for city in stations %}
+          {% for station in stations %}
           <tbody>
             <tr class="bg-gray-800">
               <td class="p-3">
                 <div class="flex align-items-center">
                   <div class="ml-3">
-                    <div class="font-bold text-white">{{ city.namen.kort }}</div>
+                    <div class="font-bold text-white">{{ station.namen.kort }}</div>
                   </div>
                 </div>
               </td>
               <td class="text-white pl-2 pr-2 text-center">
-                <a href="{% url 'station' name=city.namen.kort%}"
+                <a href="{% url 'station' station.UICCode %}"
                   >Bekijk Details!</a
                 >
               </td> 
