@@ -23,15 +23,6 @@ class NSClient:
         else:
             return None
         
-    # def get_departures(self):
-    #     stations = self.get_stations()
-    #     UICCode = ''
-    #     url = self.url + 'departures?uicCode=' + UICCode
-    #     response = requests.get(url, headers=self.headers)
-    #     if response.status_code == 200:
-    #         response = response.json()
-    #         return response['payload']['departures']
-
 class Index(TemplateView):
     template_name = 'nsapi/index.html'
 
