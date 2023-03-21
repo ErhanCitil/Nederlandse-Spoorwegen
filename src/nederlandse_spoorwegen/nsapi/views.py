@@ -15,7 +15,7 @@ class Index(TemplateView):
     def get_stations_json(self):
         search = self.request.GET.get('q')
         if search:
-            url= 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations'
+            url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations'
             headers = {'Ocp-Apim-Subscription-Key': NSAPI_KEY}
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
@@ -34,3 +34,22 @@ class Index(TemplateView):
                 context['lng'] = context['stations']['lng']
             context['googleapi'] = GOOGLE_API_KEY
             return context
+    
+class StationView(TemplateView):
+    template_name = 'stations.html'
+
+    def get_station_names(self):
+        url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations'
+        headers = {'Ocp-Apim-Subscription-Key': NSAPI_KEY}
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            response = response.json()
+            return response['payload']
+        else:
+            return None
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['stations'] = self.get_station_names()
+        return context
+    

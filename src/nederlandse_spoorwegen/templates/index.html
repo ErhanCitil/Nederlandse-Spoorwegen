@@ -32,11 +32,12 @@
 
 <h1 class="font-bold text-center text-2xl">{{stations.namen.lang}}</h1>
 
-
+{% if stations %}
 <iframe width="600"
 height="450"
 frameborder="0"
 style="border:0"
 src="https://www.google.com/maps/embed/v1/view?key={{googleapi}}&center={{lat|unlocalize}},{{lng|unlocalize}}&zoom=15"
 allowfullscreen class="flex m-auto mt-8"></iframe>
+{% endif %}
 {% endblock %}
