@@ -22,9 +22,18 @@ class NSClient:
             return response['payload']
         else:
             return None
+        
+    # def get_departures(self):
+    #     stations = self.get_stations()
+    #     UICCode = ''
+    #     url = self.url + 'departures?uicCode=' + UICCode
+    #     response = requests.get(url, headers=self.headers)
+    #     if response.status_code == 200:
+    #         response = response.json()
+    #         return response['payload']['departures']
 
 class Index(TemplateView):
-    template_name = 'index.html'
+    template_name = 'nsapi/index.html'
 
     def get_stations_json(self):
         search = self.request.GET.get('q')
@@ -47,7 +56,7 @@ class Index(TemplateView):
             return context
     
 class StationView(TemplateView):
-    template_name = 'stations.html'
+    template_name = 'nsapi/stations.html'
 
     def get_station_names(self):
         client = NSClient()
@@ -58,4 +67,29 @@ class StationView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['stations'] = self.get_station_names()
         return context
-    
+
+class StationDetailView(TemplateView):
+    template_name = 'nsapi/station_detail.html'
+
+    def get_station(self):
+        client = NSClient()
+        stations = client.get_stations()
+        for station in stations:
+            if station['namen']['kort'] == self.kwargs['name']:
+                return station
+            
+    def get_departures(self):
+        url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?uicCode=' + str(self.get_station()['UICCode'])
+        response = requests.get(url, headers={'Ocp-Apim-Subscription-Key': NSAPI_KEY})
+        if response.status_code == 200:
+            response = response.json()
+            return response['payload']['departures']
+        else:
+            return None
+            
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['station'] = self.get_station()
+        context['googleapi'] = GOOGLE_API_KEY
+        context['departures'] = self.get_departures()
+        return context

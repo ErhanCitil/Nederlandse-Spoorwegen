@@ -1,0 +1,18 @@
+{% extends 'master.html'%}
+{% block title %} Station {% endblock %}
+{% block content %}
+{% load l10n %}
+<h1 class="font-bold text-center text-2xl">{{station.namen.lang}}</h1>
+
+<iframe width="600"
+height="450"
+frameborder="0"
+style="border:0"
+src="https://www.google.com/maps/embed/v1/view?key={{googleapi}}&center={{station.lat|unlocalize}},{{station.lng|unlocalize}}&zoom=15"
+allowfullscreen class="flex m-auto mt-8"></iframe>
+
+
+{% for departure in departures%}
+<p>{{departure.direction}}</p>
+{% endfor %}
+{% endblock %}
