@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+{% block title%} Stations {% endblock %}
+{% block content %}
+<div class="flex justify-center mt-10" style="height: 350px">
+    <div class="col-span-12 h-screen">
+      <div class="overflow-auto lg:overflow-visible">
+        <table
+          class="table text-whiteborder-separate space-y-6 text-sm"
+        >
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th class="p-3 w-48">Steden</th>
+              <th class="p-3 w-48">Detail</th>
+            </tr>
+          </thead>
+  
+          {% for station in stations %}
+          <tbody>
+            <tr class="bg-gray-800">
+              <td class="p-3">
+                <div class="flex align-items-center">
+                  <div class="ml-3">
+                    <div class="font-bold text-white">{{ station.namen.middel }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-white pl-2 pr-2 text-center">
+                <a href="{% url 'station' station.UICCode %}"
+                  >Bekijk Details!</a
+                >
+              </td> 
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}

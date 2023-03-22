@@ -37,8 +37,7 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
-    # Simply show the master template.
-    path("", TemplateView.as_view(template_name="master.html"), name="root"),
+    path("", include("nederlandse_spoorwegen.nsapi.urls")),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
