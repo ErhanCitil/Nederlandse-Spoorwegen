@@ -77,6 +77,8 @@ class StationDetailView(TemplateView):
             response = response.json()
             for departuretime in response['payload']['departures']:
                 departuretime['plannedDateTime'] = datetime.strptime(departuretime['plannedDateTime'], '%Y-%m-%dT%H:%M:%S%z')
+                if departuretime['actualDateTime']:
+                    departuretime['actualDateTime'] = datetime.strptime(departuretime['actualDateTime'], '%Y-%m-%dT%H:%M:%S%z')
             return response['payload']['departures']
         else:
             return None
