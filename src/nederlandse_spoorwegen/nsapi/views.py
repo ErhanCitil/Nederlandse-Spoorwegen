@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 import requests
 from dotenv import load_dotenv
 import os
-import json
+from datetime import datetime
 # Create your views here.
 load_dotenv()
 NSAPI_KEY = os.getenv('NSAPI_KEY')
@@ -75,6 +75,9 @@ class StationDetailView(TemplateView):
         response = requests.get(url, headers={'Ocp-Apim-Subscription-Key': NSAPI_KEY})
         if response.status_code == 200:
             response = response.json()
+            for departuretime in response['payload']['departures']:
+                departuretime['plannedDateTime'] = datetime.strptime(departuretime['plannedDateTime'], '%Y-%m-%dT%H:%M:%S%z')
+                departuretime['actualDateTime'] = datetime.strptime(departuretime['actualDateTime'], '%Y-%m-%dT%H:%M:%S%z')
             return response['payload']['departures']
         else:
             return None
