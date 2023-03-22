@@ -33,7 +33,7 @@ class Index(TemplateView):
             client = NSClient()
             stations = client.get_stations()
             for station in stations:
-                if station['namen']['lang'] == search:
+                if station['namen']['lang'] == search or station['namen']['kort'] == search or station['namen']['middel'] == search:
                     return station
         else:
             return None
