@@ -9,6 +9,7 @@ load_dotenv()
 NSAPI_KEY = os.getenv('NSAPI_KEY')
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
+
 class NSClient:
     def __init__(self):
         self.url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/'
@@ -22,7 +23,7 @@ class NSClient:
             return response['payload']
         else:
             return None
-
+        
 class Index(TemplateView):
     template_name = 'nsapi/index.html'
 
@@ -36,24 +37,24 @@ class Index(TemplateView):
                     return station
         else:
             return None
-    
+
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['stations'] = self.get_stations_json()
-            if context['stations']:
-                context['lat'] = context['stations']['lat']
-                context['lng'] = context['stations']['lng']
-            context['googleapi'] = GOOGLE_API_KEY
-            return context
-    
-class StationView(TemplateView):
+        context = super().get_context_data(**kwargs)
+        context['stations'] = self.get_stations_json()
+        if context['stations']:
+            context['lat'] = context['stations']['lat']
+            context['lng'] = context['stations']['lng']
+        context['googleapi'] = GOOGLE_API_KEY
+        return context
+
+class StationsListView(TemplateView):
     template_name = 'nsapi/stations.html'
 
     def get_station_names(self):
         client = NSClient()
         stations = client.get_stations()
         return stations
-        
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['stations'] = self.get_station_names()
@@ -68,7 +69,7 @@ class StationDetailView(TemplateView):
         for station in stations:
             if station['UICCode'] == self.kwargs['uiccode']:
                 return station
-            
+
     def get_departures(self):
         url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?uicCode=' + str(self.get_station()['UICCode'])
         response = requests.get(url, headers={'Ocp-Apim-Subscription-Key': NSAPI_KEY})
@@ -77,7 +78,7 @@ class StationDetailView(TemplateView):
             return response['payload']['departures']
         else:
             return None
-            
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['station'] = self.get_station()
