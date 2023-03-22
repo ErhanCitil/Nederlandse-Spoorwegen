@@ -15,7 +15,7 @@ Nederlandse Spoorwegen
 Introduction
 ============
 
-``A Django project using the NS API to build a website where you can see the departures and disruptions for a specific station. You can also see on the Google Maps where the station is located.  ``
+``A Django project using the NS API to build a website where you can see the departures and disruptions for a specific station. You can also see on the Google Maps where the station is located.``
 
 
 Documentation
