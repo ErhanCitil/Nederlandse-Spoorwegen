@@ -1,46 +1,32 @@
 ==================
-nederlandse_spoorwegen
+Nederlandse Spoorwegen
 ==================
 
 :Version: 0.1.0
-:Source: https://bitbucket.org/maykinmedia/nederlandse_spoorwegen
-:Keywords: ``<keywords>``
+:Source: https://github.com/ErhanCitil/Nederlandse-Spoorwegen
+:Keywords: ``Python, Django, NS API``
 :PythonVersion: 3.10
 
-|build-status| |requirements|
 
-``<oneliner describing the project>``
+``Django NS API project``
 
-Developed by `Maykin Media B.V.`_ for ``<client>``
 
 
 Introduction
 ============
 
-``<describe the project in a few paragraphs and briefly mention the features>``
+``A Django project using the NS API to build a website where you can see the departures and disruptions for a specific station. You can also see on the Google Maps where the station is located.  ``
 
 
 Documentation
 =============
 
 See ``INSTALL.rst`` for installation instructions, available settings and
-commands.
+commands. Also don't forget to save your environment variables NSAPI_KEY and GOOGLE_API_KEY. It takes a few minutes to create the API keys.
 
 
 References
 ==========
 
-* `Issues <https://taiga.maykinmedia.nl/project/nederlandse_spoorwegen>`_
-* `Code <https://bitbucket.org/maykinmedia/nederlandse_spoorwegen>`_
-
-
-.. |build-status| image:: http://jenkins.maykin.nl/buildStatus/icon?job=bitbucket/nederlandse_spoorwegen/master
-    :alt: Build status
-    :target: http://jenkins.maykin.nl/job/nederlandse_spoorwegen
-
-.. |requirements| image:: https://requires.io/bitbucket/maykinmedia/nederlandse_spoorwegen/requirements.svg?branch=master
-     :target: https://requires.io/bitbucket/maykinmedia/nederlandse_spoorwegen/requirements/?branch=master
-     :alt: Requirements status
-
-
-.. _Maykin Media B.V.: https://www.maykinmedia.nl
+* `Issues <https://github.com/ErhanCitil/Nederlandse-Spoorwegen/issues>`_
+* `Code <https://github.com/ErhanCitil/Nederlandse-Spoorwegen>`_
