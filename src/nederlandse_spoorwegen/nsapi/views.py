@@ -81,9 +81,17 @@ class StationDetailView(TemplateView):
         else:
             return None
 
+    def get_station_disruptions(self):
+        url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v3/disruptions/station/' + str(self.get_station()['code'])
+        response = requests.get(url, headers={'Ocp-Apim-Subscription-Key': NSAPI_KEY})
+        if response.status_code == 200:
+            response = response.json()
+            return response
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['station'] = self.get_station()
         context['googleapi'] = GOOGLE_API_KEY
         context['departures'] = self.get_departures()
+        context['disruption'] = self.get_station_disruptions()
         return context
