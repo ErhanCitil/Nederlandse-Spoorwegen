@@ -1,11 +1,11 @@
 {% extends 'master.html' %}
-{% block title %}Search{% endblock %}
+{% block title %}NS | API{% endblock %}
 {% block content %}
 {% load l10n %}
 {% include 'components/navbar.html'%}
 
 {% if stations %}
-<h1 class="font-bold text-center text-2xl">{{stations}}</h1>
+<h1 class="font-bold text-center text-2xl">{{stations.namen.lang}}</h1>
 {% endif %}
 
 {% if stations %}
@@ -15,6 +15,7 @@ frameborder="0"
 style="border:0"
 src="https://www.google.com/maps/embed/v1/view?key={{googleapi}}&center={{lat|unlocalize}},{{lng|unlocalize}}&zoom=15"
 allowfullscreen class="flex m-auto mt-8"></iframe>
+{% include 'components/table.html'%}
 {% endif %}
 {% include 'components/footer.html'%}
 {% endblock %}
