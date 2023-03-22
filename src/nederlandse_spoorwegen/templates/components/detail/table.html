@@ -18,7 +18,7 @@
                         {% for departure in departures%}
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{departure.direction}}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{departure.actualDateTime|date:'H:i'}}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{departure.plannedDateTime|date:'H:i'}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
